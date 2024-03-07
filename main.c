@@ -4,7 +4,7 @@
 #include <libpic30.h>
 #include "config.h"
 #include "lcd.h"
-
+#include <string.h>
 
 void system_init(){
     /****************************************************************************
