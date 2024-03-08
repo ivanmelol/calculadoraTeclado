@@ -42,8 +42,9 @@ void system_init(){
 
 void main(){
     //Declaracion de variables
-    int LCD_AUXILIAR=0;
+    int LCD_AUXILIAR=0,i=0;
     char NUM='0';
+    char numero[]="              ";
     
     
     system_init();
@@ -55,17 +56,12 @@ void main(){
     while(1){
         LCD_PORT=LCD_AUXILIAR;
         
-        if(NUM!='&'){
-            LCDPutChar(NUM);
-        }
+
         NUM='&';
         //Rutina del display
-         /*LCDPutStr("Hello Word");
+         LCDPutStr(numero);
         __delay_ms(30);
-        LCDGoto(0,1); 
-        LCDPutStr("Valentina");
-        __delay_ms(30);
-         LCDGoto(0,0);*/
+         LCDGoto(0,0);
          
          LCD_AUXILIAR=LCD_PORT;
          //Rutina de salida del teclado
@@ -74,26 +70,43 @@ void main(){
             if(PORTAbits.RA2==1) NUM='8';
             if(PORTAbits.RA1==1) NUM='9';
             if(PORTAbits.RA0==1) NUM='/';
-         __delay_ms(30);
+         __delay_ms(3);
          PORTB=PORTB<<1;
             if(PORTAbits.RA3==1) NUM='4';
             if(PORTAbits.RA2==1) NUM='5';
             if(PORTAbits.RA1==1) NUM='6';
             if(PORTAbits.RA0==1) NUM='x';
-         __delay_ms(30);
+         __delay_ms(3);
          PORTB=PORTB<<1;
             if(PORTAbits.RA3==1) NUM='1';
             if(PORTAbits.RA2==1) NUM='2';
             if(PORTAbits.RA1==1) NUM='3';
             if(PORTAbits.RA0==1) NUM='-';
-         __delay_ms(30);
+         __delay_ms(3);
          PORTB=PORTB<<1;
             //if(PORTAbits.RA3==1) NUM='1';
             if(PORTAbits.RA2==1) NUM='0';
             if(PORTAbits.RA1==1) NUM='=';
             if(PORTAbits.RA0==1) NUM='+';
-         __delay_ms(30);
+         __delay_ms(3);
          
+        if(NUM!='&'){
+            if(NUM=='/' || NUM=='+' || NUM=='-' || NUM=='x'){
+                 DisplayClr();
+                 numero[0]=' ';
+                 numero[1]=' ';
+                 numero[2]=' ';
+                 numero[3]=' ';
+                 LCDPutChar(NUM);
+                 i=0;
+            }
+            else{
+                numero[i]=NUM;
+                i++;  
+            }
+
+        }
+
          //NUM='1';
          
          
